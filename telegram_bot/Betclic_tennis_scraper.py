@@ -28,10 +28,10 @@ def create_tennis_driver(link: str):
 
     # set up Chrome driver
     options = Options()
-    #options.add_argument('--no-sandbox')
-    #options.add_argument('--headless')
-    #options.add_argument('--disable-gpu')
-    #options.add_argument('--disable-dev-shm-usage')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
+    options.add_argument('--disable-dev-shm-usage')
 
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
@@ -56,3 +56,29 @@ def retrieve_tennis_point_service(driver: webdriver):
     point_service = driver.find_element(By.CLASS_NAME, class_name)
     info = point_service.text
     return info
+
+def get_tennis_matches():
+
+    match_links = get_match_links()
+
+    if match_links.get('Error'):
+        print("we have a problem of too many requests")
+    else:
+        links = match_links.get('links')
+
+    all_text = []
+
+    for url in links[:1]:
+        driver = create_tennis_driver(url)
+        if driver is None:
+            continue
+        else:
+            info = retrieve_tennis_point_service(driver)
+            try:
+                result = re.search(r'Aces(.*?)0 selection', info, re.DOTALL)
+                if result:
+                    extracted_text = result.group(1).strip()
+                all_text.append(extracted_text)
+            except Exception:
+                print("no Aces found")
+    return all_text
