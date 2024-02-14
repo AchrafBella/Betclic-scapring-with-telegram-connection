@@ -22,7 +22,7 @@ def get_match_links(url: str=URL) -> dict:
 
         return {"Error": False, "links": matchs_link}
     else:
-        return{"Error": True, "Message": f"Unable to retrieve the webpage. Status code: {response.status_code}"}  
+        return{"Error": True}
 
 def create_tennis_driver(link: str):
 
@@ -41,11 +41,10 @@ def create_tennis_driver(link: str):
     try:
         # coockies
         driver.find_element("xpath", '//*[@id="popin_tc_privacy_button_2"]').click()
-        driver.implicitly_wait(1)
+        driver.implicitly_wait(2)
         # click to "points et service"
         x_path = '//*[@id="matchHeader"]/div/sports-category-filters/bcdk-tabs/div/div/div/div[last()]/span'
         driver.find_element("xpath", x_path).click()
-        driver.implicitly_wait(2)
         return driver
     
     except Exception as e:
@@ -57,21 +56,22 @@ def retrieve_tennis_point_service(driver: webdriver):
     info = point_service.text
     return info
 
-def get_tennis_matches():
+def get_tennis_matches(update, context):
 
     match_links = get_match_links()
 
     if match_links.get('Error'):
-        print("we have a problem of too many requests")
+        #print("we have a problem of too many requests")
+        context.bot.send_message(chat_id=update.effective_chat.id, text='There was too many requests, please try later.')
     else:
         links = match_links.get('links')
 
     all_text = []
 
-    for url in links[:1]:
+    for url in links[:3]:
         driver = create_tennis_driver(url)
         if driver is None:
-            continue
+            context.bot.send_message(chat_id=update.effective_chat.id, text='There was an exception, please try again.')
         else:
             info = retrieve_tennis_point_service(driver)
             try:
@@ -80,5 +80,15 @@ def get_tennis_matches():
                     extracted_text = result.group(1).strip()
                 all_text.append(extracted_text)
             except Exception:
-                print("no Aces found")
+                #print("No Aces found.")
+                context.bot.send_message(chat_id=update.effective_chat.id, text='No Aces found.')
     return all_text
+
+def create_basket_driver(link: str):
+    pass
+
+def retrieve_basket_driver(driver: webdriver):
+    pass
+
+def get_basketBall_matches(update, context):
+    pass
