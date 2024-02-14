@@ -23,7 +23,7 @@ def basket_match(update, context):
 start_handler = CommandHandler('start', start)
 help_handler = CommandHandler('help', help)
 tennis_handler = CommandHandler('tennis_match', tennis_match)
-basket_handler = CommandHandler('basket_handler', basket_match)
+basket_handler = CommandHandler('basket_match', basket_match)
 
 dispatcher.add_handler(start_handler)
 dispatcher.add_handler(help_handler)
