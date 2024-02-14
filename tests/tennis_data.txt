@@ -1,0 +1,50 @@
+Points 
+Total de points du jeu 7 (Set 1)
+4
+3,15
+5
+2,70
+6
+3,25
+7+
+4,80
+Vainqueur Point 1 (Set 1, Jeu 7)
+R. Safiullin
+2,50
+H. Rune
+1,27
+Course aux 2 points (Set 1, Jeu 7)
+R. Safiullin
+3,25
+H. Rune
+1,18
+Vainqueur des 2 premiers points (Set 1, Jeu 7)
+R. Safiullin
+8,75
+Nul
+2,05
+H. Rune
+1,80
+Aces
+Plus grand nombre d'aces
+R. Safiullin
+1,50
+Nul
+8,00
+H. Rune
+2,40
+Nombre total d'aces dans le match
++ de 13.5
+1,70
+- de 13.5
+1,70
+Nombre d'aces inscrits par le joueur 1 dans le match
++ de 7.5
+1,70
+- de 7.5
+1,70
+Nombre d'aces inscrits par le joueur 2 dans le match
++ de 6.5
+1,70
+- de 6.5
+1,70

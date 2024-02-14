@@ -1,0 +1,58 @@
+import requests
+import re
+from bs4 import BeautifulSoup
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+
+# change URL base on the category
+BASE_URL = 'https://www.betclic.fr/'
+URL = 'https://www.betclic.fr/tennis-s2'
+
+def get_match_links(url: str=URL) -> dict:
+
+    response = requests.get(url)
+    if response.status_code == 200:
+        
+        soup = BeautifulSoup(response.text, 'html.parser')
+        href_attributes = [BASE_URL+a.get('href') for a in soup.find_all('a') if '/tennis-s2/' in a.get('href')]
+        matchs_link = [href.encode('ascii', 'ignore').decode('unicode_escape') for href in href_attributes]
+
+        return {"Error": False, "links": matchs_link}
+    else:
+        return{"Error": True, "Message": f"Unable to retrieve the webpage. Status code: {response.status_code}"}  
+
+def create_tennis_driver(link: str):
+
+    # set up Chrome driver
+    options = Options()
+    #options.add_argument('--no-sandbox')
+    #options.add_argument('--headless')
+    #options.add_argument('--disable-gpu')
+    #options.add_argument('--disable-dev-shm-usage')
+
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+
+    # Navigate to the webpage you want to scrape
+    driver.get(link)
+
+    try:
+        # coockies
+        driver.find_element("xpath", '//*[@id="popin_tc_privacy_button_2"]').click()
+        driver.implicitly_wait(1)
+        # click to "points et service"
+        x_path = '//*[@id="matchHeader"]/div/sports-category-filters/bcdk-tabs/div/div/div/div[last()]/span'
+        driver.find_element("xpath", x_path).click()
+        driver.implicitly_wait(2)
+        return driver
+    
+    except Exception as e:
+        return None  
+
+def retrieve_tennis_point_service(driver: webdriver):
+    class_name = 'block'
+    point_service = driver.find_element(By.CLASS_NAME, class_name)
+    info = point_service.text
+    return info
