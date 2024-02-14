@@ -34,7 +34,6 @@ def create_tennis_driver(link: str):
     options.add_argument('--disable-dev-shm-usage')
 
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
-
     # Navigate to the webpage you want to scrape
     driver.get(link)
 

@@ -8,7 +8,7 @@ WORKDIR /bot
 COPY ./requirements.txt .
 
 # Install Python packages from requirements file
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
 COPY ./telegram_bot /bot
 
