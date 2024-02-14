@@ -6,6 +6,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
+from time import sleep
 
 # change URL base on the category
 BASE_URL = 'https://www.betclic.fr/'
@@ -71,6 +72,8 @@ def get_tennis_matches(update, context):
             context.bot.send_message(chat_id=update.effective_chat.id, text='There was an exception, please try again.')
         else:
             info = retrieve_tennis_point_service(driver)
+            driver.close()
+            sleep(1)
             try:
                 result = re.search(r'Aces(.*?)0 selection', info, re.DOTALL)
                 if result:
