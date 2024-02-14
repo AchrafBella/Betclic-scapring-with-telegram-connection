@@ -13,10 +13,8 @@ def help(update, context):
 
 def tennis_match(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text='Please wait till we get the matchs.')
-    all_matches_text = get_tennis_matches(update, context)
-    for elm in all_matches_text:
-        context.bot.send_message(chat_id=update.effective_chat.id, text=elm)
-
+    get_tennis_matches(update, context)
+    
 def basket_match(update, context):
     context.bot.send_message(chat_id=update.effective_chat.id, text='Comming soon.')
 

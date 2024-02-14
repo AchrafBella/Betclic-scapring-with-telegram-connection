@@ -65,9 +65,7 @@ def get_tennis_matches(update, context):
     else:
         links = match_links.get('links')
 
-    all_text = []
-
-    for url in links[:3]:
+    for url in links:
         driver = create_tennis_driver(url)
         if driver is None:
             context.bot.send_message(chat_id=update.effective_chat.id, text='There was an exception, please try again.')
@@ -77,11 +75,10 @@ def get_tennis_matches(update, context):
                 result = re.search(r'Aces(.*?)0 selection', info, re.DOTALL)
                 if result:
                     extracted_text = result.group(1).strip()
-                all_text.append(extracted_text)
+                    context.bot.send_message(chat_id=update.effective_chat.id, text=extracted_text)
             except Exception:
                 #print("No Aces found.")
                 context.bot.send_message(chat_id=update.effective_chat.id, text='No Aces found.')
-    return all_text
 
 def create_basket_driver(link: str):
     pass
