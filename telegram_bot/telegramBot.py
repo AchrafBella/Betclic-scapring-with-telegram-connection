@@ -1,22 +1,31 @@
 from telegram.ext import Updater, CommandHandler
 from Betclic_tennis_scraper import get_tennis_matches
+
 token = '6820009462:AAFRd8TiKYNFoLpbsMW0Tb_S0J5iP8KqvNw'
 
 Bot = Updater(token, use_context=True)
 dispatcher = Bot.dispatcher
 
 def start(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text='Hello welcome to this bot. Please check help command.')
+    context.bot.send_message(chat_id=update.effective_chat.id, 
+                             text='Hello welcome to this bot. Please check help command.',
+                             parse_mode="markdown")
 
 def help(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text='This bot offre tennis data & baskket ball data using /tennis_match & /basket_match command.')
+    context.bot.send_message(chat_id=update.effective_chat.id, 
+                             text='This bot offre tennis data & baskket ball data using /tennis_match & /basket_match command.',
+                             parse_mode="markdown")
 
 def tennis_match(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text='Please wait till we get the matchs.')
+    context.bot.send_message(chat_id=update.effective_chat.id, 
+                             text='Please wait till we get the matchs.', 
+                             parse_mode="markdown")
     get_tennis_matches(update, context)
     
 def basket_match(update, context):
-    context.bot.send_message(chat_id=update.effective_chat.id, text='Comming soon.')
+    context.bot.send_message(chat_id=update.effective_chat.id, 
+                             text='Comming soon.', 
+                             parse_mode="markdown")
 
 start_handler = CommandHandler('start', start)
 help_handler = CommandHandler('help', help)
