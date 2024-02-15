@@ -37,6 +37,8 @@ def check_page(link: str):
     options.add_argument('--headless')
     options.add_argument('--disable-gpu')
     options.add_argument('--disable-dev-shm-usage')
+    options.add_argument('log-level=3')
+
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     # Navigate to the webpage you want to scrape
     driver.get(link)
@@ -44,7 +46,7 @@ def check_page(link: str):
     try:
         # coockies
         driver.find_element("xpath", '//*[@id="popin_tc_privacy_button_2"]').click()
-        driver.implicitly_wait(3)
+        driver.implicitly_wait(2)
         # click to "points et service"
         x_path = '//*[@id="matchHeader"]/div/sports-category-filters/bcdk-tabs/div/div/div/div[last()]/span'
         driver.find_element("xpath", x_path).click()
@@ -66,14 +68,14 @@ def get_tennis_matches(update, context):
                                  text='There was too many requests, please try later.')
     else:
         links = match_links.get('links')
-
+    """
     if os.path.exists('visited_url.sav'):
         pre_existing_urls = read_list_from_file('visited_url.sav')
     else:
         initialize_empty_list('visited_url.sav')
         pre_existing_urls = read_list_from_file('visited_url.sav')
-        
-    selected_urls = [url for url in links if url not in pre_existing_urls]
+    """    
+    selected_urls = [url for url in links]
     
     for url in selected_urls:
         driver_res = check_page(url)
