@@ -59,7 +59,7 @@ def retrieve_tennis_point_service(driver: webdriver):
     return point_service.text
 
 def get_tennis_matches(update, context):
-
+    """
     match_links = get_match_links()
     if match_links.get('Error'):
         context.bot.send_message(chat_id=update.effective_chat.id, 
@@ -74,6 +74,7 @@ def get_tennis_matches(update, context):
         pre_existing_urls = read_list_from_file('visited_url.sav')
         
     selected_urls = [url for url in links if url not in pre_existing_urls]
+    """
     
     for url in ['https://www.betclic.fr/tennis-s2/buenos-aires-atp-c1033/s-baez-l-darderi-m3002241047']:
         driver_res = check_page(url)
