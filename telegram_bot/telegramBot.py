@@ -1,6 +1,6 @@
 from telegram.ext import Updater, CommandHandler
 from Betclic_tennis_scraper import get_tennis_matches
-token = '6976979474:AAEVdRlIttVZqimThh_75dlqW2siCT3H19M'
+token = '6820009462:AAFRd8TiKYNFoLpbsMW0Tb_S0J5iP8KqvNw'
 
 Bot = Updater(token, use_context=True)
 dispatcher = Bot.dispatcher
