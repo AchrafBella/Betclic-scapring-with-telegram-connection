@@ -75,7 +75,7 @@ def get_tennis_matches(update, context):
         
     selected_urls = [url for url in links if url not in pre_existing_urls]
     
-    for url in selected_urls:
+    for url in ['https://www.betclic.fr/tennis-s2/buenos-aires-atp-c1033/s-baez-l-darderi-m3002241047']:
         driver_res = check_page(url)
         if driver_res.get('Error'):
             context.bot.send_message(chat_id=update.effective_chat.id, 
