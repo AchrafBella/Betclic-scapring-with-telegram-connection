@@ -68,13 +68,13 @@ def get_tennis_matches(update, context):
                                  text='There was too many requests, please try later.')
     else:
         links = match_links.get('links')
-    """
+    
     if os.path.exists('visited_url.sav'):
         pre_existing_urls = read_list_from_file('visited_url.sav')
     else:
         initialize_empty_list('visited_url.sav')
         pre_existing_urls = read_list_from_file('visited_url.sav')
-    """    
+        
     selected_urls = [url for url in links]
     
     for url in selected_urls:
