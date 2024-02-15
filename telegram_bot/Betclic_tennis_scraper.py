@@ -43,8 +43,8 @@ def check_page(link: str):
 
     try:
         # coockies
-        driver.find_element("xpath", '//*[@id="popin_tc_privacy_button_2"]').click()
-        driver.implicitly_wait(3)
+        #driver.find_element("xpath", '//*[@id="popin_tc_privacy_button_2"]').click()
+        #driver.implicitly_wait(3)
         # click to "points et service"
         x_path = '//*[@id="matchHeader"]/div/sports-category-filters/bcdk-tabs/div/div/div/div[last()]/span'
         driver.find_element("xpath", x_path).click()
@@ -76,7 +76,8 @@ def get_tennis_matches(update, context):
     selected_urls = [url for url in links if url not in pre_existing_urls]
     """
     
-    for url in ['https://www.betclic.fr/tennis-s2/buenos-aires-atp-c1033/s-baez-l-darderi-m3002241047']:
+    for url in ['https://www.betclic.fr/tennis-s2/buenos-aires-atp-c1033/s-baez-l-darderi-m3002241047',
+                'https://www.betclic.fr/tennis-s2/doha-wta-c2208/i-swiatek-v-azarenka-m3002242318']:
         driver_res = check_page(url)
         if driver_res.get('Error'):
             context.bot.send_message(chat_id=update.effective_chat.id, 
